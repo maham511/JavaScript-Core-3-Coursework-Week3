@@ -7,29 +7,28 @@ let order = [
   { itemName: "Hash Brown", quantity: 4, unitPrice: 0.4 },
 ];
 
-//take array of orders
-//access each property
-//log each property
-// log total
-//make console log table
-
-//make title
-function receipt(QTY, ITEM, TOTAL) {
+//make new obj keys
+function makeReceipt(QTY, ITEM, TOTAL) {
   this.QTY = QTY;
   this.ITEM = ITEM;
   this.TOTAL = TOTAL;
 }
 
-function takeOrder(array) {
-  let totalPrice = 0;
+function printOrder(array) {
+
+  let totalBill = 0;
+
+  //stores array of makeReceipt objects (QTY, ITEM & TOTAL keys)
   let totalPurchase = array.map(({ itemName, quantity, unitPrice }) => {
-    let itemTotal = quantity * unitPrice;
-    totalPrice += itemTotal;
-    return new receipt(quantity, itemName, itemTotal.toFixed(2))
+    let itemTotal = quantity * unitPrice; //gives total for each item
+    totalBill += itemTotal;    //adds each item's total to final bill
+
+    //creates makeReceipt obj, itemTotal upto 2 decimals
+    return new makeReceipt(quantity, itemName, itemTotal.toFixed(2))
   });
 
-  console.table(totalPurchase);
-  console.log(`Total ${totalPrice}`);
+  console.table(totalPurchase);  //logs all items table
+  console.log(`Total: ${totalBill}`);
 }
 
-takeOrder(order);
+printOrder(order);
